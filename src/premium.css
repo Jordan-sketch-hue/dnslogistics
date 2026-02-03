@@ -62,13 +62,16 @@ body {
     align-items: center;
     gap: 1rem;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     text-decoration: none;
     color: var(--dark);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
 }
 
 .navbar-brand:hover {
     transform: translateY(-2px);
+    background: rgba(212, 38, 42, 0.05);
 }
 
 .navbar-logo {
@@ -78,10 +81,12 @@ body {
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(14, 36, 76, 0.1);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .navbar-brand:hover .navbar-logo {
     box-shadow: 0 8px 20px rgba(212, 38, 42, 0.15);
+    transform: scale(1.05);
 }
 
 .logo-text {
@@ -89,6 +94,12 @@ body {
     font-weight: 700;
     color: var(--navy);
     letter-spacing: 1px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover .logo-text {
+    color: var(--accent);
 }
 
 .logo-subtext {
@@ -96,6 +107,12 @@ body {
     color: var(--accent);
     font-weight: 600;
     letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover .logo-subtext {
+    color: var(--navy);
 }
 
 .nav-menu {
@@ -154,12 +171,16 @@ body {
 .top-link.primary {
     background: linear-gradient(135deg, var(--accent), #ff3344);
     color: var(--white);
-    border: none;
+    border: none !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(212, 38, 42, 0.2);
 }
 
 .top-link.primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 38, 42, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(212, 38, 42, 0.4);
+    letter-spacing: 0.5px;
 }
 
 .hamburger {
