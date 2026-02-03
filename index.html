@@ -3,42 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D.N Express Logistics - Global Shipping Solutions Jamaica</title>
-    <meta name="description" content="Fast, reliable shipping from USA to Jamaica. Air freight, sea freight, personal shopping, and ecommerce support.">
+    <title>D.N Express - Premium Logistics Jamaica</title>
+    <meta name="description" content="Fast, reliable, premium shipping from USA to Jamaica. Air & sea freight, personal shopping, ecommerce solutions.">
     <link rel="icon" type="image/jpeg" href="assets/dnexpress%20logo.jpg">
-    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/premium.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-content">
-                <div class="top-bar-left">
-                    <span><i class="fas fa-phone"></i> <a href="tel:18763332649">1876-333-2649</a></span>
-                    <span><i class="fas fa-envelope"></i> <a href="mailto:dnexpresslogisticsja@gmail.com">dnexpresslogisticsja@gmail.com</a></span>
-                </div>
-                <div class="top-bar-right">
-                    <a href="auth.html" class="top-link"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
-                    <a href="auth.html" class="top-link primary"><i class="fas fa-user-plus"></i> SIGN UP</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container navbar-inner">
-            <div class="navbar-brand">
+            <a href="#home" class="navbar-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                 <img src="assets/dnexpress%20logo.jpg" alt="D.N Express Logo" class="navbar-logo">
-                <div class="navbar-text">
-                    <h1 class="logo-text">D.N EXPRESS</h1>
-                    <p class="logo-subtext">Delivering the World Faster</p>
+                <div>
+                    <div class="logo-text">D.N EXPRESS</div>
+                    <div class="logo-subtext">Premium Logistics</div>
                 </div>
-            </div>
+            </a>
             
             <button class="hamburger" id="hamburger" onclick="toggleMenu()">
                 <span></span>
@@ -47,13 +31,12 @@
             </button>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#products" class="nav-link">Products</a></li>
-                <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
-                <li><a href="#rates" class="nav-link">Check Rates</a></li>
+                <li><a href="#process" class="nav-link">How It Works</a></li>
+                <li><a href="#rates" class="nav-link">Rates</a></li>
                 <li><a href="#track" class="nav-link">Track</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="auth.html" class="top-link primary"><i class="fas fa-sign-in-alt"></i> SIGN IN</a></li>
             </ul>
         </div>
     </nav>
@@ -61,21 +44,20 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Want To Bring Your Items Faster Into Jamaica?</h1>
-            <p>D.N Express Logistics - Bringing the best freight forwarding service to the island of Jamaica</p>
-            <button class="cta-button" onclick="document.getElementById('rates').scrollIntoView({behavior: 'smooth'})">
-                <i class="fas fa-shipping-fast"></i> CHECK RATES
-            </button>
+            <h1>Bringing Jamaica Closer to the World <span class="quirk-emoji">🌍</span></h1>
+            <p>Premium logistics from USA to Jamaica. Fast. Reliable. Premium.</p>
+            <a href="#rates" class="cta-button quick-action">
+                <i class="fas fa-shipping-fast"></i> Get Instant Rates
+            </a>
         </div>
-        <div class="hero-overlay"></div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="services-section">
         <div class="container">
             <div class="section-header">
-                <h2>OUR SERVICES</h2>
-                <p>Comprehensive shipping solutions from USA to Jamaica</p>
+                <h2>OUR SERVICES <span class="perk-badge">TRUSTED</span></h2>
+                <p>Everything you need for seamless shipping</p>
             </div>
 
             <div class="services-grid">
@@ -83,129 +65,123 @@
                     <div class="service-icon">
                         <i class="fas fa-plane"></i>
                     </div>
-                    <h3>Air Freight</h3>
-                    <p>Our Air Freight Service is Top Notch! from USA. We Do it fast and efficient, from package receiveal to delivery.</p>
-                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    <h3>Air Freight <span class="perk-badge">FAST</span></h3>
+                    <p>Lightning-fast air freight service. 5-7 days from USA to Jamaica with premium handling.</p>
+                    <a href="#rates" class="read-more">Get a quote</a>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-ship"></i>
                     </div>
-                    <h3>Sea Freight</h3>
-                    <p>From a Pin to an Anchor, Our Freight Forwarding Service offers a solution for both large and small shipments ensuring on-time delivery.</p>
-                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    <h3>Sea Freight <span class="perk-badge">ECONOMICAL</span></h3>
+                    <p>Budget-friendly sea shipping for larger shipments. 14-21 days with full tracking.</p>
+                    <a href="#rates" class="read-more">Get a quote</a>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-shopping-bag"></i>
                     </div>
-                    <h3>Personal Shopping</h3>
-                    <p>Making Your Shopping Experience a Breeze! Use Our Credit Card on Your Favorite Online Stores.</p>
-                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    <h3>Personal Shopping <span class="perk-badge">NEW</span></h3>
+                    <p>We shop on Amazon, eBay, Walmart & more. You pick, we ship to Jamaica.</p>
+                    <a href="#contact" class="read-more">Learn more</a>
                 </div>
 
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-store"></i>
                     </div>
-                    <h3>Ecommerce Support</h3>
-                    <p>Complete support for your online business. From importing goods to managing inventory and fulfillment.</p>
-                    <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                    <h3>Ecommerce Support <span class="perk-badge">PRO</span></h3>
+                    <p>Complete solutions for online sellers. Inventory, fulfillment, and delivery.</p>
+                    <a href="#contact" class="read-more">Partner with us</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
+    <!-- How It Works -->
+    <section id="process" class="how-it-works">
         <div class="container">
             <div class="section-header">
-                <h2>HOW IT WORKS</h2>
+                <h2>Simple Process <span class="perk-badge">4 STEPS</span></h2>
             </div>
             
-            <div class="steps-grid">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Check Rates</h3>
-                    <p>Get instant shipping quotes</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <h3>Get Quote</h3>
+                    <p>Check rates instantly for your shipment</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
                     <h3>Place Order</h3>
-                    <p>Create shipment or shop with us</p>
+                    <p>Ship your items or shop with us</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Track Shipment</h3>
-                    <p>Real-time tracking updates</p>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <h3>Track Real-Time</h3>
+                    <p>Know exactly where your items are</p>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Get Delivery</h3>
-                    <p>Island-wide fast delivery</p>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <h3>Fast Delivery</h3>
+                    <p>Island-wide delivery to your door</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- What We Offer -->
     <section id="products" class="products-section">
         <div class="container">
             <div class="section-header">
-                <h2>WHAT WE CAN HELP WITH</h2>
-                <p>D.N Express provides complete logistics solutions</p>
+                <h2>Why Choose D.N Express</h2>
+                <p>Premium features you'll love</p>
             </div>
 
-            <div class="products-list">
-                <div class="product-item">
+            <div class="products-grid">
+                <div class="product-card">
                     <div class="product-icon">
                         <i class="fas fa-box"></i>
                     </div>
-                    <div class="product-content">
-                        <h3>Bringing Your Items To Jamaica</h3>
-                        <p>Ship packages from anywhere in the USA to Jamaica with fast, reliable service.</p>
+                    <div class="product-body">
+                        <h3>USA to Jamaica Shipping</h3>
+                        <p>From single packages to bulk shipments, we handle it all with care.</p>
+                        <p class="product-price">From $25</p>
                     </div>
                 </div>
 
-                <div class="product-item">
+                <div class="product-card">
                     <div class="product-icon">
                         <i class="fas fa-cart-shopping"></i>
                     </div>
-                    <div class="product-content">
-                        <h3>Doing Your Online Shopping For You</h3>
-                        <p>We shop for you on any US online store and deliver to Jamaica.</p>
+                    <div class="product-body">
+                        <h3>Shop For You Online</h3>
+                        <p>We purchase from your favorite US stores and deliver to Jamaica.</p>
+                        <p class="product-price">Convenience</p>
                     </div>
                 </div>
 
-                <div class="product-item">
+                <div class="product-card">
                     <div class="product-icon">
-                        <i class="fas fa-percent"></i>
+                        <i class="fas fa-tag"></i>
                     </div>
-                    <div class="product-content">
-                        <h3>Providing Discounts On Major Platforms</h3>
-                        <p>Get exclusive discounts on Amazon, eBay, Walmart and other major retailers.</p>
+                    <div class="product-body">
+                        <h3>Exclusive Discounts</h3>
+                        <p>Special rates on Amazon, eBay, Walmart and 1000+ retailers.</p>
+                        <p class="product-price">Save More</p>
                     </div>
                 </div>
 
-                <div class="product-item">
+                <div class="product-card">
                     <div class="product-icon">
-                        <i class="fas fa-building-columns"></i>
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <div class="product-content">
-                        <h3>Bringing Goods From Our Ecommerce Store</h3>
-                        <p>Shop directly from our curated selection of products.</p>
-                    </div>
-                </div>
-
-                <div class="product-item">
-                    <div class="product-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="product-content">
-                        <h3>Allowing You To Sell Your Goods To Our Customer Base</h3>
-                        <p>Partner with us to reach thousands of customers in Jamaica.</p>
+                    <div class="product-body">
+                        <h3>Real-Time Tracking</h3>
+                        <p>Live GPS tracking from pickup to delivery at your door.</p>
+                        <p class="product-price">Always Updated</p>
                     </div>
                 </div>
             </div>
@@ -216,129 +192,111 @@
     <section id="rates" class="rates-section">
         <div class="container">
             <div class="section-header">
-                <h2>CHECK RATES & SERVICES</h2>
+                <h2>Get Instant Quote</h2>
+                <p>See your shipping cost in seconds</p>
             </div>
 
-            <div class="rates-content">
-                <div class="rates-form">
-                    <h3>Get Instant Shipping Quotes</h3>
-                    <form id="ratesForm">
-                        <div class="form-group">
-                            <label for="origin">From (Origin):</label>
-                            <input type="text" id="origin" placeholder="USA City" value="USA" readonly />
-                        </div>
-                        <div class="form-group">
-                            <label for="destination">To (Destination):</label>
-                            <select id="destination" required>
-                                <option value="">Select Destination</option>
-                                <option value="Kingston">Kingston</option>
-                                <option value="Montego Bay">Montego Bay</option>
-                                <option value="Ocho Rios">Ocho Rios</option>
-                                <option value="Negril">Negril</option>
-                                <option value="Spanish Town">Spanish Town</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="weight">Weight (lbs):</label>
-                            <input type="number" id="weight" placeholder="Enter weight" min="1" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Type:</label>
-                            <select id="service" required>
-                                <option value="air">Air Freight (5-7 days)</option>
-                                <option value="sea">Sea Freight (14-21 days)</option>
-                            </select>
-                        </div>
-                        <button type="button" class="cta-button" onclick="calculateRates()">CALCULATE RATE</button>
-                    </form>
-                </div>
+            <div class="rates-container">
+                <form id="ratesForm">
+                    <div class="form-group">
+                        <label for="destination">Destination in Jamaica</label>
+                        <select id="destination" required>
+                            <option value="">Select Location</option>
+                            <option value="Kingston">Kingston</option>
+                            <option value="Ocho Rios">Ocho Rios</option>
+                            <option value="Montego Bay">Montego Bay</option>
+                            <option value="Negril">Negril</option>
+                            <option value="Spanish Town">Spanish Town</option>
+                        </select>
+                    </div>
 
-                <div class="rates-result">
-                    <h3>Your Rate</h3>
-                    <div id="rateDisplay" class="rate-display" style="display: none;">
-                        <div class="rate-info">
-                            <p><strong>Service:</strong> <span id="serviceDisplay"></span></p>
-                            <p><strong>Weight:</strong> <span id="weightDisplay"></span> lbs</p>
-                            <p><strong>Destination:</strong> <span id="destDisplay"></span></p>
-                            <div class="rate-price">
-                                <p>Estimated Cost:</p>
-                                <h2 id="priceDisplay">$0.00</h2>
-                            </div>
-                            <a href="#" class="cta-button">PROCEED TO CHECKOUT</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="weight">Weight (pounds)</label>
+                        <input type="number" id="weight" placeholder="1 - 1000" min="1" max="1000" required />
                     </div>
-                    <div id="ratePrompt" class="rate-prompt">
-                        <p>Fill in the form and click "Calculate Rate" to see pricing</p>
+
+                    <div class="form-group">
+                        <label for="service">Service Type</label>
+                        <select id="service" required>
+                            <option value="air">✈️ Air Freight (5-7 days) - Premium</option>
+                            <option value="sea">🚢 Sea Freight (14-21 days) - Economy</option>
+                        </select>
                     </div>
+
+                    <button type="button" class="cta-button" onclick="calculateRate()">
+                        <i class="fas fa-calculator"></i> Calculate Rate
+                    </button>
+                </form>
+
+                <div id="rateResult" class="rate-result">
+                    <h3>Your Shipping Quote</h3>
+                    <p id="rateDetails"></p>
+                    <div class="rate-amount" id="rateAmount"></div>
+                    <a href="auth.html" class="cta-button" style="margin-top: 1rem;">
+                        <i class="fas fa-arrow-right"></i> Proceed to Checkout
+                    </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Track Section -->
+    <section id="track" class="tracking-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Track Your Shipment</h2>
+                <p>Real-time delivery updates</p>
+            </div>
+
+            <div class="tracking-container">
+                <form id="trackingForm" onsubmit="trackShipment(event)">
+                    <div class="tracking-form">
+                        <input type="text" id="trackingNumber" placeholder="Enter tracking number (e.g., TRK-12345)" required />
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-search"></i> Track
+                        </button>
+                    </div>
+                </form>
+
+                <div id="trackingResult" class="tracking-result"></div>
             </div>
         </div>
     </section>
 
     <!-- Locations Section -->
-    <section id="locations" class="locations-section">
+    <section id="locations" class="services-section">
         <div class="container">
             <div class="section-header">
-                <h2>OUR PICKUP LOCATIONS</h2>
-                <p>Multiple convenient locations across Jamaica</p>
+                <h2>Our Pickup Locations</h2>
+                <p>Visit us or call anytime</p>
             </div>
 
-            <div class="locations-grid">
-                <div class="location-card">
-                    <h3><i class="fas fa-map-marker-alt"></i> Ocho Rios</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Ocho Rios</h3>
                     <p>Shop 4 White River Commercial Complex</p>
-                    <p><a href="tel:18763332649">(876) 333-2649</a></p>
+                    <p><strong><i class="fas fa-phone"></i> <a href="tel:+18763332649">(876) 333-2649</a></strong></p>
                 </div>
-                <div class="location-card">
-                    <h3><i class="fas fa-map-marker-alt"></i> Kingston</h3>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Kingston</h3>
                     <p>Kingston Fulfillment Center</p>
-                    <p><a href="tel:18764351438">(876) 435-1438</a></p>
+                    <p><strong><i class="fas fa-phone"></i> <a href="tel:+18764351438">(876) 435-1438</a></strong></p>
                 </div>
-                <div class="location-card">
-                    <h3><i class="fas fa-map-marker-alt"></i> Montego Bay</h3>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Montego Bay</h3>
                     <p>Montego Bay Distribution Hub</p>
-                    <p><a href="tel:18763332649">(876) 333-2649</a></p>
+                    <p><strong><i class="fas fa-phone"></i> <a href="tel:+18763332649">(876) 333-2649</a></strong></p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Track Shipment Section -->
-    <section id="track" class="track-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>TRACK YOUR SHIPMENT</h2>
-                <p>Get real-time updates on your delivery</p>
-            </div>
-
-            <div class="tracking-container">
-                <div class="tracking-form-wrapper">
-                    <h3>Enter Your Tracking Number</h3>
-                    <form id="trackingForm" onsubmit="trackShipment(event)">
-                        <div class="form-group">
-                            <input type="text" id="trackingNumber" placeholder="e.g., TRK-123456789" required />
-                        </div>
-                        <button type="submit" class="cta-button">TRACK SHIPMENT</button>
-                    </form>
-                </div>
-
-                <div id="trackingResult" class="tracking-result" style="display: none;">
-                    <h3>Shipment Status</h3>
-                    <div id="trackingDetails"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="newsletter-section">
-        <div class="container">
-            <h2>SUBSCRIBE TO OUR NEWSLETTER</h2>
-            <p>Get updates on D.N Express as well as updates in the world of shipping and logistics.</p>
-            <form id="newsletterForm" class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required />
-                <button type="submit" class="cta-button">SUBMIT</button>
-            </form>
         </div>
     </section>
 
@@ -346,62 +304,98 @@
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="section-header">
-                <h2>CONTACT US</h2>
+                <h2 style="color: white;">Get in Touch</h2>
+                <p style="color: rgba(255,255,255,0.9);">Have questions? We'd love to hear from you</p>
             </div>
 
-            <div class="contact-grid">
-                <div class="contact-box">
-                    <h3><i class="fas fa-map-marker-alt"></i> LOCATION</h3>
-                    <p>Shop 4 White River Commercial Complex</p>
-                    <p>Ocho Rios, Jamaica</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-detail">
+                            <h4>Phone</h4>
+                            <a href="tel:+18763332649">(876) 333-2649</a>
+                            <a href="tel:+18764351438">(876) 435-1438</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-detail">
+                            <h4>Email</h4>
+                            <a href="mailto:dnexpresslogisticsja@gmail.com">dnexpresslogisticsja@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-detail">
+                            <h4>Address</h4>
+                            <p>Shop 4 White River Commercial Complex<br>Ocho Rios, Jamaica</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-detail">
+                            <h4>Hours</h4>
+                            <p>Mon-Fri: 8:00 AM - 5:00 PM<br>Sat: 9:00 AM - 2:00 PM</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-box">
-                    <h3><i class="fas fa-phone"></i> PHONE</h3>
-                    <p><a href="tel:18763332649">(876) 333-2649</a></p>
-                    <p><a href="tel:18764351438">(876) 435-1438</a></p>
-                </div>
-                <div class="contact-box">
-                    <h3><i class="fas fa-envelope"></i> EMAIL</h3>
-                    <p><a href="mailto:dnexpresslogisticsja@gmail.com">dnexpresslogisticsja@gmail.com</a></p>
-                </div>
-                <div class="contact-box">
-                    <h3><i class="fas fa-clock"></i> HOURS</h3>
-                    <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
-                    <p>Saturday: 9:00 AM - 2:00 PM</p>
+
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm" onsubmit="handleContactForm(event)">
+                        <div class="form-group-light">
+                            <input type="text" placeholder="Your Name" required />
+                        </div>
+                        <div class="form-group-light">
+                            <input type="email" placeholder="Your Email" required />
+                        </div>
+                        <div class="form-group-light">
+                            <input type="text" placeholder="Subject" required />
+                        </div>
+                        <div class="form-group-light">
+                            <textarea placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="container footer-content">
             <div class="footer-section">
-                <img src="assets/dnexpress%20logo.jpg" alt="D.N Express Logo" class="footer-logo">
-                <h4>D.N EXPRESS LOGISTICS</h4>
-                <p>Bringing the best new freight forwarding service to Jamaica</p>
+                <img src="assets/dnexpress%20logo.jpg" alt="D.N Express" class="footer-logo">
+                <h4>D.N EXPRESS</h4>
+                <p>Premium logistics from USA to Jamaica. Fast. Reliable. Professional.</p>
                 <div class="social-links">
-                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" title="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 
             <div class="footer-section">
-                <h4>QUICK LINKS</h4>
-                <ul>
-                    <li><a href="#home">Home</a></li>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#products">Products</a></li>
+                    <li><a href="#process">How It Works</a></li>
                     <li><a href="#rates">Rates</a></li>
                     <li><a href="#track">Track</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
 
             <div class="footer-section">
-                <h4>SERVICES</h4>
-                <ul>
+                <h4>Services</h4>
+                <ul class="footer-links">
                     <li><a href="#services">Air Freight</a></li>
                     <li><a href="#services">Sea Freight</a></li>
                     <li><a href="#services">Personal Shopping</a></li>
@@ -410,18 +404,21 @@
             </div>
 
             <div class="footer-section">
-                <h4>CONTACT INFO</h4>
-                <p>Phone: <a href="tel:18763332649">(876) 333-2649</a></p>
-                <p>Email: <a href="mailto:dnexpresslogisticsja@gmail.com">dnexpresslogisticsja@gmail.com</a></p>
-                <p>Part of Fast Forward Now Network</p>
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="auth.html">Sign In</a></li>
+                    <li><a href="auth.html">Create Account</a></li>
+                    <li><a href="#contact">Support</a></li>
+                    <li>Part of Fast Forward Now</li>
+                </ul>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 D.N Express Logistics. All Rights Reserved. | Design by D.N Express</p>
+            <p>&copy; 2026 D.N Express Logistics. All rights reserved. | Bringing Jamaica Closer to the World 🌍</p>
         </div>
     </footer>
 
-    <script src="src/app.js"></script>
+    <script src="src/premium.js"></script>
 </body>
 </html>
