@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - D.N Express Logistics</title>
+    <link rel="icon" type="image/jpeg" href="assets/dnexpress%20logo.jpg">
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <div class="navbar-brand">
+                <img src="assets/dnexpress%20logo.jpg" alt="D.N Express Logo" class="navbar-logo">
+                <div class="navbar-text">
+                    <a href="index.html" class="logo-text" style="color: #D4262A; text-decoration: none;">D.N EXPRESS</a>
+                    <p class="logo-subtext">Delivering the World Faster</p>
+                </div>
+            </div>
+            <a href="index.html" class="nav-back-link">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-wrapper">
+            <!-- Login Form -->
+            <div class="auth-form login-form" id="loginForm">
+                <div class="auth-header">
+                    <h2><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
+                    <p>Sign in to your D.N Express account</p>
+                </div>
+
+                <form id="loginFormElement" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="login-email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </div>
+
+                    <button type="submit" class="cta-button full-width">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                </form>
+
+                <div class="auth-divider">OR</div>
+
+                <div class="social-login">
+                    <button class="social-btn google-btn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button class="social-btn facebook-btn">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Don't have an account? 
+                        <a href="#" onclick="toggleAuthForms()" class="toggle-link">Create one</a>
+                    </p>
+                    <a href="index.html" class="forgot-password">Forgot password?</a>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="auth-form signup-form" id="signupForm" style="display: none;">
+                <div class="auth-header">
+                    <h2><i class="fas fa-user-plus"></i> Get Started</h2>
+                    <p>Create your D.N Express account in seconds</p>
+                </div>
+
+                <form id="signupFormElement" onsubmit="handleSignup(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signup-first-name"><i class="fas fa-user"></i> First Name</label>
+                            <input type="text" id="signup-first-name" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-last-name"><i class="fas fa-user"></i> Last Name</label>
+                            <input type="text" id="signup-last-name" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="signup-email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-phone"><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="signup-phone" placeholder="(876) 333-2649" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="signup-password" placeholder="Min 8 characters" required minlength="8">
+                        <small style="color: #666;">At least 8 characters, with uppercase, lowercase, and numbers</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" placeholder="Confirm password" required>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the Terms & Conditions</label>
+                    </div>
+
+                    <button type="submit" class="cta-button full-width">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <div class="auth-divider">OR</div>
+
+                <div class="social-login">
+                    <button class="social-btn google-btn">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button class="social-btn facebook-btn">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Already have an account? 
+                        <a href="#" onclick="toggleAuthForms()" class="toggle-link">Sign in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="auth-info">
+            <div class="info-content">
+                <img src="assets/dnexpress%20logo.jpg" alt="D.N Express" class="info-logo">
+                <h3>D.N Express Logistics</h3>
+                <p>Fast, reliable shipping solutions from USA to Jamaica</p>
+                
+                <div class="info-features">
+                    <div class="feature">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Fast Shipping</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure & Safe</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-headset"></i>
+                        <span>24/7 Support</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-map-location-dot"></i>
+                        <span>Track Anywhere</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content success-modal">
+            <i class="fas fa-check-circle"></i>
+            <h2>Success!</h2>
+            <p id="successMessage"></p>
+            <button class="cta-button" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="errorModal">
+        <div class="modal-content error-modal">
+            <i class="fas fa-exclamation-circle"></i>
+            <h2>Error</h2>
+            <p id="errorMessage"></p>
+            <button class="cta-button" onclick="closeModal()">Try Again</button>
+        </div>
+    </div>
+
+    <script src="src/auth.js"></script>
+</body>
+</html>

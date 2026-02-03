@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - D.N Express Logistics</title>
+    <link rel="icon" type="image/jpeg" href="assets/dnexpress%20logo.jpg">
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="dashboard-navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/dnexpress%20logo.jpg" alt="D.N Express Logo" class="navbar-logo">
+                <a href="index.html" class="logo-text" style="color: #D4262A; text-decoration: none;">D.N EXPRESS</a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#shipments" class="nav-item" data-section="shipments">
+                    <i class="fas fa-box"></i> My Shipments
+                </a>
+                <a href="#quotes" class="nav-item" data-section="quotes">
+                    <i class="fas fa-calculator"></i> Get Quotes
+                </a>
+                <a href="#tracking" class="nav-item" data-section="tracking">
+                    <i class="fas fa-map-location-dot"></i> Track
+                </a>
+                <a href="#profile" class="nav-item" data-section="profile">
+                    <i class="fas fa-user-circle"></i> Profile
+                </a>
+            </div>
+
+            <div class="nav-actions">
+                <div class="user-menu">
+                    <span id="userName" style="color: #0E244C; font-weight: 600;"></span>
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-content">
+                <div class="user-card">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3 id="userNameSidebar"></h3>
+                    <p id="userEmailSidebar"></p>
+                </div>
+
+                <nav class="sidebar-menu">
+                    <a href="#" class="sidebar-item active" onclick="switchSection('dashboard')">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchSection('shipments')">
+                        <i class="fas fa-box"></i> My Shipments
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchSection('quotes')">
+                        <i class="fas fa-calculator"></i> Get Quotes
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchSection('tracking')">
+                        <i class="fas fa-map-location-dot"></i> Track Shipment
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchSection('profile')">
+                        <i class="fas fa-user"></i> Profile Settings
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="switchSection('support')">
+                        <i class="fas fa-headset"></i> Support
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="dashboard-section active">
+                <div class="section-header">
+                    <h1>Welcome back, <span id="dashboardName"></span>! 👋</h1>
+                    <p>Here's your shipping overview</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Shipments</h3>
+                            <p id="totalShipments" class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Delivered</h3>
+                            <p id="deliveredShipments" class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>In Transit</h3>
+                            <p id="inTransitShipments" class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Spent</h3>
+                            <p id="totalSpent" class="stat-number">$0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="switchSection('quotes')">
+                            <i class="fas fa-calculator"></i>
+                            <span>Get a Quote</span>
+                        </button>
+                        <button class="action-btn" onclick="switchSection('tracking')">
+                            <i class="fas fa-map-location-dot"></i>
+                            <span>Track Shipment</span>
+                        </button>
+                        <button class="action-btn" onclick="switchSection('shipments')">
+                            <i class="fas fa-box"></i>
+                            <span>Create Shipment</span>
+                        </button>
+                        <button class="action-btn" onclick="switchSection('support')">
+                            <i class="fas fa-headset"></i>
+                            <span>Contact Support</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Shipments -->
+                <div class="recent-shipments">
+                    <h2>Recent Shipments</h2>
+                    <div id="recentList" class="shipments-list">
+                        <p style="text-align: center; color: #999; padding: 40px;">No shipments yet. Create your first one!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Shipments Section -->
+            <section id="shipments-section" class="dashboard-section">
+                <div class="section-header">
+                    <h1>My Shipments</h1>
+                    <button class="cta-button" onclick="showCreateShipment()">
+                        <i class="fas fa-plus"></i> New Shipment
+                    </button>
+                </div>
+
+                <div class="shipments-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tracking ID</th>
+                                <th>Status</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shipmentsTableBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: #999; padding: 40px;">
+                                    No shipments found. Create your first shipment!
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Get Quotes Section -->
+            <section id="quotes-section" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Calculate Shipping Quote</h1>
+                    <p>Get an instant quote for your shipment</p>
+                </div>
+
+                <div class="quote-form-container">
+                    <form id="quoteForm" onsubmit="handleQuoteSubmit(event)" class="quote-form">
+                        <div class="form-group-2">
+                            <div class="form-group">
+                                <label><i class="fas fa-location-dot"></i> Origin</label>
+                                <input type="text" value="USA" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-location-dot"></i> Destination</label>
+                                <select required>
+                                    <option value="">Select destination</option>
+                                    <option value="Kingston">Kingston</option>
+                                    <option value="Montego Bay">Montego Bay</option>
+                                    <option value="Ocho Rios">Ocho Rios</option>
+                                    <option value="Negril">Negril</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-2">
+                            <div class="form-group">
+                                <label><i class="fas fa-weight"></i> Weight (lbs)</label>
+                                <input type="number" placeholder="Enter weight" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-plane"></i> Service Type</label>
+                                <select required>
+                                    <option value="air">Air Freight (5-7 days)</option>
+                                    <option value="sea">Sea Freight (14-21 days)</option>
+                                    <option value="express">Express (2-3 days)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-calculator"></i> Calculate Quote
+                        </button>
+                    </form>
+
+                    <div id="quoteResult" class="quote-result" style="display: none;">
+                        <h2>Your Quote</h2>
+                        <div class="quote-details">
+                            <div class="quote-item">
+                                <span>Base Rate:</span>
+                                <strong id="baseRate">$0.00</strong>
+                            </div>
+                            <div class="quote-item">
+                                <span>Weight Charge:</span>
+                                <strong id="weightCharge">$0.00</strong>
+                            </div>
+                            <div class="quote-item total">
+                                <span>Total:</span>
+                                <strong id="totalQuote">$0.00</strong>
+                            </div>
+                        </div>
+                        <button type="button" class="cta-button" onclick="proceedToShipment()">
+                            <i class="fas fa-arrow-right"></i> Proceed to Shipment
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Track Shipment Section -->
+            <section id="tracking-section" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Track Your Shipment</h1>
+                </div>
+
+                <div class="tracking-container">
+                    <form id="trackingForm" onsubmit="handleTrackingSubmit(event)">
+                        <div class="form-group">
+                            <label><i class="fas fa-barcode"></i> Tracking Number</label>
+                            <input type="text" id="trackingInput" placeholder="e.g., TRK-123456789" required>
+                        </div>
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-search"></i> Track Shipment
+                        </button>
+                    </form>
+
+                    <div id="trackingResult" class="tracking-result" style="display: none;">
+                        <h2>Shipment Status</h2>
+                        <div class="status-card">
+                            <div class="status-header">
+                                <h3 id="trackingStatus"></h3>
+                                <span class="status-badge" id="statusBadge"></span>
+                            </div>
+                            <div class="status-details">
+                                <div class="detail-item">
+                                    <label>Tracking #:</label>
+                                    <p id="trackingNum"></p>
+                                </div>
+                                <div class="detail-item">
+                                    <label>From:</label>
+                                    <p id="trackingOrigin"></p>
+                                </div>
+                                <div class="detail-item">
+                                    <label>To:</label>
+                                    <p id="trackingDest"></p>
+                                </div>
+                                <div class="detail-item">
+                                    <label>Est. Delivery:</label>
+                                    <p id="trackingETA"></p>
+                                </div>
+                            </div>
+                            <div class="status-timeline">
+                                <div class="timeline-item active">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Processing</h4>
+                                        <p>Your shipment has been received</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>In Transit</h4>
+                                        <p>On the way to Jamaica</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Customs</h4>
+                                        <p>Clearing customs</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <h4>Delivered</h4>
+                                        <p>Ready for pickup</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Profile Settings</h1>
+                </div>
+
+                <div class="profile-container">
+                    <form id="profileForm" onsubmit="handleProfileUpdate(event)" class="profile-form">
+                        <div class="form-group-2">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" id="profileFirstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" id="profileLastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="profileEmail" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="profilePhone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password (Leave blank to keep current)</label>
+                            <input type="password" id="profilePassword" placeholder="New password">
+                        </div>
+
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support-section" class="dashboard-section">
+                <div class="section-header">
+                    <h1>Support & Help</h1>
+                </div>
+
+                <div class="support-container">
+                    <div class="support-grid">
+                        <div class="support-card">
+                            <i class="fas fa-phone"></i>
+                            <h3>Call Us</h3>
+                            <p><a href="tel:18763332649">(876) 333-2649</a></p>
+                            <p style="font-size: 12px; color: #999;">Mon-Sat: 9AM-6PM</p>
+                        </div>
+
+                        <div class="support-card">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:dnexpresslogisticsja@gmail.com">dnexpresslogisticsja@gmail.com</a></p>
+                            <p style="font-size: 12px; color: #999;">Response within 24hrs</p>
+                        </div>
+
+                        <div class="support-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Live Chat</h3>
+                            <p>Chat with our support team</p>
+                            <button class="cta-button" style="margin-top: 10px; padding: 8px 16px; font-size: 13px;">
+                                <i class="fas fa-comment"></i> Start Chat
+                            </button>
+                        </div>
+
+                        <div class="support-card">
+                            <i class="fas fa-question-circle"></i>
+                            <h3>FAQs</h3>
+                            <p>Find answers to common questions</p>
+                            <a href="index.html#faq" class="view-link">View FAQs →</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h2>Send us a Message</h2>
+                        <form onsubmit="handleSupportSubmit(event)">
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="cta-button">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="src/auth.js"></script>
+    <script src="src/dashboard.js"></script>
+</body>
+</html>
