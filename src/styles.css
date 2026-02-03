@@ -154,6 +154,24 @@ a:hover {
     margin: 2px 0 0 0;
 }
 
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-logo {
+    height: 50px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(212, 38, 42, 0.2);
+}
+
+.navbar-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
@@ -795,6 +813,14 @@ a:hover {
     color: var(--accent-red);
     margin-bottom: 15px;
     font-size: 18px;
+}
+
+.footer-logo {
+    height: 60px;
+    width: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(212, 38, 42, 0.3);
 }
 
 .footer-section p {
