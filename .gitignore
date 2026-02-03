@@ -1,0 +1,61 @@
+# Git ignore for D.N Express Logistics
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node modules (if using Node.js)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build files
+dist/
+build/
+out/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+.directory
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Private sensitive data
+*.key
+*.pem
+api-keys.txt
+credentials.json
+
+# Package manager lock files (optional - keep or remove based on preference)
+# package-lock.json
+# yarn.lock
+
+# Testing
+coverage/
+.pytest_cache/
+
+# IDE workspace
+.workspace
+
+# Generated files
+*.min.js
+*.min.css
