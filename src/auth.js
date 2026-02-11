@@ -1,144 +1,234 @@
-// Authentication System
+/**
+ * Authentication System - Connected to Backend API
+ * Handles login, registration, and token management
+ * Communicates with Express backend at /api/auth endpoints
+ */
 class UserAuth {
     constructor() {
-        this.users = this.loadUsers();
+        // API configuration
+        this.apiURL = localStorage.getItem('apiUrl') || 'http://localhost:5000/api';
         this.currentUser = this.loadCurrentUser();
     }
 
-    loadUsers() {
-        const stored = localStorage.getItem('dnexpress_users');
-        return stored ? JSON.parse(stored) : [];
-    }
-
-    saveUsers() {
-        localStorage.setItem('dnexpress_users', JSON.stringify(this.users));
-    }
-
+    /**
+     * Load current user from localStorage if exists
+     */
     loadCurrentUser() {
         const stored = localStorage.getItem('dnexpress_currentUser');
         return stored ? JSON.parse(stored) : null;
     }
 
+    /**
+     * Save user data to localStorage
+     */
     saveCurrentUser(user) {
         localStorage.setItem('dnexpress_currentUser', JSON.stringify(user));
         this.currentUser = user;
     }
 
-    isLoggedIn() {
-        return this.currentUser !== null;
+    /**
+     * Get JWT tokens from localStorage
+     */
+    getTokens() {
+        const stored = localStorage.getItem('dnexpress_tokens');
+        return stored ? JSON.parse(stored) : null;
     }
 
+    /**
+     * Save JWT tokens to localStorage
+     */
+    saveTokens(tokens) {
+        localStorage.setItem('dnexpress_tokens', JSON.stringify(tokens));
+    }
+
+    /**
+     * Get access token for API requests
+     */
+    getAccessToken() {
+        const tokens = this.getTokens();
+        return tokens ? tokens.accessToken : null;
+    }
+
+    /**
+     * Check if user is logged in
+     */
+    isLoggedIn() {
+        return this.currentUser !== null && this.getAccessToken() !== null;
+    }
+
+    /**
+     * Validate email format
+     */
     validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
 
+    /**
+     * Validate password strength
+     * Requirements: 8+ chars, uppercase, lowercase, number
+     */
     validatePassword(password) {
-        // At least 8 chars, 1 uppercase, 1 lowercase, 1 number
         return password.length >= 8 &&
                /[A-Z]/.test(password) &&
                /[a-z]/.test(password) &&
                /[0-9]/.test(password);
     }
 
-    signup(firstName, lastName, email, phone, password) {
+    /**
+     * Register new customer account via backend API
+     * @param {string} companyName - Company name
+     * @param {string} firstName - First name
+     * @param {string} lastName - Last name
+     * @param {string} email - Email address
+     * @param {string} phone - Phone number
+     * @param {string} password - Password
+     * @returns {Promise<object>} - Success/error response
+     */
+    async signup(companyName, firstName, lastName, email, phone, password) {
         // Validate inputs
+        if (!companyName) return { success: false, message: 'Please enter company name' };
         if (!firstName || !lastName) return { success: false, message: 'Please enter your name' };
         if (!this.validateEmail(email)) return { success: false, message: 'Invalid email format' };
         if (!this.validatePassword(password)) {
             return { success: false, message: 'Password must have 8+ chars, uppercase, lowercase, and numbers' };
         }
-        if (this.users.find(u => u.email === email)) {
-            return { success: false, message: 'Email already registered' };
+
+        try {
+            // Call backend API to register
+            const response = await fetch(`${this.apiURL}/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    companyName,
+                    firstName,
+                    lastName,
+                    email,
+                    phone,
+                    password
+                })
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                return { success: false, message: data.message || 'Registration failed' };
+            }
+
+            // Save user and tokens
+            this.saveCurrentUser(data.user);
+            this.saveTokens(data.tokens);
+
+            console.log('✓ Account created successfully');
+            return { success: true, message: 'Account created successfully!' };
+
+        } catch (error) {
+            console.error('Registration error:', error);
+            return { success: false, message: 'Registration failed. Please try again.' };
         }
-
-        // Create user
-        const user = {
-            id: Date.now(),
-            firstName,
-            lastName,
-            email,
-            phone,
-            password: this.hashPassword(password),
-            createdAt: new Date().toISOString(),
-            shipments: [],
-            savedAddresses: []
-        };
-
-        this.users.push(user);
-        this.saveUsers();
-
-        // Auto-login after signup
-        this.saveCurrentUser({
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            phone: user.phone
-        });
-
-        return { success: true, message: 'Account created successfully!' };
     }
 
-    login(email, password) {
+    /**
+     * Login customer via backend API
+     * @param {string} email - Email address
+     * @param {string} password - Password
+     * @returns {Promise<object>} - Success/error response with tokens
+     */
+    async login(email, password) {
         if (!this.validateEmail(email)) {
             return { success: false, message: 'Invalid email format' };
         }
 
-        const user = this.users.find(u => u.email === email);
-        if (!user) return { success: false, message: 'User not found' };
-
-        if (this.hashPassword(password) !== user.password) {
-            return { success: false, message: 'Invalid password' };
+        if (!password) {
+            return { success: false, message: 'Please enter password' };
         }
 
-        this.saveCurrentUser({
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            phone: user.phone
-        });
+        try {
+            // Call backend API to login
+            const response = await fetch(`${this.apiURL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        return { success: true, message: 'Login successful!' };
+            const data = await response.json();
+
+            if (!data.success) {
+                return { success: false, message: data.message || 'Login failed' };
+            }
+
+            // Save user and tokens
+            this.saveCurrentUser(data.user);
+            this.saveTokens(data.tokens);
+
+            console.log('✓ Login successful');
+            return { success: true, message: 'Login successful!' };
+
+        } catch (error) {
+            console.error('Login error:', error);
+            return { success: false, message: 'Login failed. Please try again.' };
+        }
     }
-
+    /**
+     * Logout user and clear stored data
+     */
     logout() {
         localStorage.removeItem('dnexpress_currentUser');
+        localStorage.removeItem('dnexpress_tokens');
         this.currentUser = null;
     }
 
-    hashPassword(password) {
-        // Simple hash for demo (use bcrypt in production)
-        return btoa(password);
-    }
-
+    /**
+     * Get user profile
+     */
     getProfile() {
         return this.currentUser;
     }
 
-    updateProfile(data) {
+    /**
+     * Update user profile via backend API
+     */
+    async updateProfile(data) {
         if (!this.currentUser) return { success: false, message: 'Not logged in' };
 
-        const userIndex = this.users.findIndex(u => u.id === this.currentUser.id);
-        if (userIndex === -1) return { success: false, message: 'User not found' };
+        try {
+            const response = await fetch(`${this.apiURL}/customers/${this.currentUser.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.getAccessToken()}`
+                },
+                body: JSON.stringify(data)
+            });
 
-        // Update user
-        Object.assign(this.users[userIndex], data);
-        this.saveUsers();
+            const result = await response.json();
 
-        // Update current user
-        Object.assign(this.currentUser, data);
-        this.saveCurrentUser(this.currentUser);
+            if (!result.success) {
+                return { success: false, message: result.message || 'Update failed' };
+            }
 
-        return { success: true, message: 'Profile updated!' };
+            // Update stored user
+            this.saveCurrentUser(result.user);
+
+            return { success: true, message: 'Profile updated!' };
+
+        } catch (error) {
+            console.error('Profile update error:', error);
+            return { success: false, message: 'Failed to update profile' };
+        }
     }
 }
 
 // Initialize auth
 const auth = new UserAuth();
 
-// Toggle between login and signup
+/**
+ * Toggle between login and signup forms
+ */
 function toggleAuthForms() {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
@@ -152,20 +242,76 @@ function toggleAuthForms() {
     }
 }
 
-// Handle login
-function handleLogin(event) {
+/**
+ * Handle login form submission
+ * Calls backend API to authenticate user
+ */
+async function handleLogin(event) {
     event.preventDefault();
 
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    const result = auth.login(email, password);
+    // Show loading state
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Signing in...';
+
+    const result = await auth.login(email, password);
 
     if (result.success) {
         showSuccess('Login successful! Redirecting to dashboard...');
         setTimeout(() => {
             window.location.href = 'dashboard.html';
-        }, 2000);
+        }, 1500);
+    } else {
+        showError(result.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
+}
+
+/**
+ * Handle signup form submission
+ * Calls backend API to register new account
+ */
+async function handleSignup(event) {
+    event.preventDefault();
+
+    const companyName = document.getElementById('signup-company').value;
+    const firstName = document.getElementById('signup-firstName').value;
+    const lastName = document.getElementById('signup-lastName').value;
+    const email = document.getElementById('signup-email').value;
+    const phone = document.getElementById('signup-phone').value;
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+    // Validate passwords match
+    if (password !== confirmPassword) {
+        showError('Passwords do not match');
+        return;
+    }
+
+    // Show loading state
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creating account...';
+
+    const result = await auth.signup(companyName, firstName, lastName, email, phone, password);
+
+    if (result.success) {
+        showSuccess('Account created! Redirecting to dashboard...');
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 1500);
+    } else {
+        showError(result.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+    }
+}
     } else {
         showError(result.message);
     }
