@@ -1,0 +1,49 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server.js"
+    },
+    {
+      "src": "/auth.html",
+      "dest": "/auth.html"
+    },
+    {
+      "src": "/dashboard.html",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/index.html",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "JWT_SECRET": "@VERCEL_JWT_SECRET@",
+    "JWT_REFRESH_SECRET": "@VERCEL_JWT_REFRESH_SECRET@",
+    "SETHWAN_API_URL": "@VERCEL_SETHWAN_API_URL@",
+    "SETHWAN_API_KEY": "@VERCEL_SETHWAN_API_KEY@",
+    "SETHWAN_ACCOUNT_ID": "@VERCEL_SETHWAN_ACCOUNT_ID@",
+    "FRONTEND_URL": "@VERCEL_FRONTEND_URL@"
+  }
+}

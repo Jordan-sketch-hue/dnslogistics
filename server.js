@@ -111,6 +111,31 @@ app.use('/api/status', statusRoutes);
 // GET    /api/admin/reports     - Generate reports
 app.use('/api/admin', adminRoutes);
 
+// Health check endpoint
+app.get('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'D.N Express Logistics API is running',
+        status: 'online',
+        endpoints: {
+            auth: '/api/auth',
+            customers: '/api/customers',
+            shipments: '/api/shipments',
+            inventory: '/api/inventory',
+            status: '/api/status',
+            admin: '/api/admin'
+        },
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Static files - serve HTML pages
+app.use(express.static('public'));
+app.get(['/auth', '/dashboard', '/index'], (req, res) => {
+    const page = req.path.substring(1) || 'index';
+    res.sendFile(`${__dirname}/${page}.html`);
+});
+
 // 404 Handler
 app.use((req, res) => {
     res.status(404).json({
@@ -134,10 +159,16 @@ app.use((err, req, res, next) => {
 // Start server
 // ============================================
 const PORT = process.env.PORT || 5000;
-const HOST = process.env.HOST || 'localhost';
+const HOST = process.env.HOST || '0.0.0.0';
 
-const server = app.listen(PORT, () => {
-    console.log(`
+// Only listen if not in serverless environment (Vercel)
+if (process.env.VERCEL) {
+    // Vercel serverless - just export the app
+    console.log('Running in Vercel serverless environment');
+} else {
+    // Local or traditional server environment
+    const server = app.listen(PORT, HOST, () => {
+        console.log(`
     ╔════════════════════════════════════════════════════╗
     ║   D.N Express Logistics - Backend Server          ║
     ║   Fast Forward Now White Label Platform           ║
@@ -149,15 +180,16 @@ const server = app.listen(PORT, () => {
     ║   Docs:       http://${HOST}:${PORT}/api/docs     
     ╚════════════════════════════════════════════════════╝
     `);
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('SIGTERM received, shutting down gracefully...');
-    server.close(() => {
-        console.log('Server closed');
-        process.exit(0);
     });
-});
+
+    // Graceful shutdown
+    process.on('SIGTERM', () => {
+        console.log('SIGTERM received, shutting down gracefully...');
+        server.close(() => {
+            console.log('Server closed');
+            process.exit(0);
+        });
+    });
+}
 
 module.exports = app;
