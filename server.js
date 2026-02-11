@@ -111,8 +111,12 @@ app.use('/api/status', statusRoutes);
 // GET    /api/admin/reports     - Generate reports
 app.use('/api/admin', adminRoutes);
 
-// Serve static files from public directory
+// Serve static files from multiple directories
 app.use(express.static('public'));
+app.use(express.static('src'));
+app.use(express.static('assets'));
+app.use('/src', express.static('src'));
+app.use('/assets', express.static('assets'));
 
 // HTML page routes
 app.get('/', (req, res) => {
