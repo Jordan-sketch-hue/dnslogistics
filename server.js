@@ -111,8 +111,76 @@ app.use('/api/status', statusRoutes);
 // GET    /api/admin/reports     - Generate reports
 app.use('/api/admin', adminRoutes);
 
-// Health check endpoint
+// Serve static files from public directory
+app.use(express.static('public'));
+
+// HTML page routes
 app.get('/', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'auth.html');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    } catch (error) {
+        res.status(500).send('Error loading page');
+    }
+});
+
+app.get('/auth', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'auth.html');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    } catch (error) {
+        res.status(500).send('Error loading page');
+    }
+});
+
+app.get('/auth.html', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'auth.html');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    } catch (error) {
+        res.status(500).send('Error loading page');
+    }
+});
+
+app.get('/dashboard', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'dashboard.html');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    } catch (error) {
+        res.status(500).send('Error loading page');
+    }
+});
+
+app.get('/dashboard.html', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'dashboard.html');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    } catch (error) {
+        res.status(500).send('Error loading page');
+    }
+});
+
+app.get('/api/health', (req, res) => {
     res.status(200).json({
         success: true,
         message: 'D.N Express Logistics API is running',
@@ -127,13 +195,6 @@ app.get('/', (req, res) => {
         },
         timestamp: new Date().toISOString()
     });
-});
-
-// Static files - serve HTML pages
-app.use(express.static('public'));
-app.get(['/auth', '/dashboard', '/index'], (req, res) => {
-    const page = req.path.substring(1) || 'index';
-    res.sendFile(`${__dirname}/${page}.html`);
 });
 
 // 404 Handler
