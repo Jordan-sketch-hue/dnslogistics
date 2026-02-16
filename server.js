@@ -14,6 +14,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 // Import route modules
@@ -158,11 +159,16 @@ app.use('/api/reports', reportsRoutes);
 app.use('/api/sethwan', sethwanRoutes);
 
 // Serve static files from multiple directories
-app.use(express.static('public'));
-app.use(express.static('src'));
-app.use(express.static('assets'));
-app.use('/src', express.static('src'));
-app.use('/assets', express.static('assets'));
+const staticDirs = ['public', 'src', 'assets'];
+staticDirs.forEach(dir => {
+    const fullPath = path.join(__dirname, dir);
+    app.use(express.static(fullPath));
+    console.log(`📁 Serving static files from: ${fullPath}`);
+});
+
+// Explicit routes for static files
+app.use('/src', express.static(path.join(__dirname, 'src')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // HTML page routes
 app.get('/', (req, res) => {
