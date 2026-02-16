@@ -171,10 +171,11 @@ app.use('/src', express.static(path.join(__dirname, 'src')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // HTML page routes
+// Homepage - main website
 app.get('/', (req, res) => {
     const fs = require('fs');
     const path = require('path');
-    const filePath = path.join(__dirname, 'auth.html');
+    const filePath = path.join(__dirname, 'index.html');
     try {
         const content = fs.readFileSync(filePath, 'utf8');
         res.setHeader('Content-Type', 'text/html');
@@ -184,6 +185,20 @@ app.get('/', (req, res) => {
     }
 });
 
+app.get('/index.html', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const filePath = path.join(__dirname, 'index.html');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.send(content);
+    } catch (error) {
+        res.status(500).send('Error loading page');
+    }
+});
+
+// Login/Auth page
 app.get('/auth', (req, res) => {
     const fs = require('fs');
     const path = require('path');
@@ -210,6 +225,7 @@ app.get('/auth.html', (req, res) => {
     }
 });
 
+// Dashboard page
 app.get('/dashboard', (req, res) => {
     const fs = require('fs');
     const path = require('path');
