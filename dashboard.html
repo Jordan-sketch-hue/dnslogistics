@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Global Error Handler -->
+    <script src="src/errorHandler.js"></script>
+    
     <!-- Navigation -->
     <nav class="dashboard-navbar">
         <div class="nav-container">
@@ -64,22 +67,22 @@
                 </div>
 
                 <nav class="sidebar-menu">
-                    <a href="#" class="sidebar-item active" onclick="switchSection('dashboard')">
+                    <a href="#" class="sidebar-item active" onclick="event.preventDefault(); switchSection('dashboard')">
                         <i class="fas fa-home"></i> Dashboard
                     </a>
-                    <a href="#" class="sidebar-item" onclick="switchSection('shipments')">
+                    <a href="#" class="sidebar-item" onclick="event.preventDefault(); switchSection('shipments')">
                         <i class="fas fa-box"></i> My Shipments
                     </a>
-                    <a href="#" class="sidebar-item" onclick="switchSection('quotes')">
+                    <a href="#" class="sidebar-item" onclick="event.preventDefault(); switchSection('quotes')">
                         <i class="fas fa-calculator"></i> Get Quotes
                     </a>
-                    <a href="#" class="sidebar-item" onclick="switchSection('tracking')">
+                    <a href="#" class="sidebar-item" onclick="event.preventDefault(); switchSection('tracking')">
                         <i class="fas fa-map-location-dot"></i> Track Shipment
                     </a>
-                    <a href="#" class="sidebar-item" onclick="switchSection('profile')">
+                    <a href="#" class="sidebar-item" onclick="event.preventDefault(); switchSection('profile')">
                         <i class="fas fa-user"></i> Profile Settings
                     </a>
-                    <a href="#" class="sidebar-item" onclick="switchSection('support')">
+                    <a href="#" class="sidebar-item" onclick="event.preventDefault(); switchSection('support')">
                         <i class="fas fa-headset"></i> Support
                     </a>
                 </nav>
@@ -93,6 +96,43 @@
                 <div class="section-header">
                     <h1>Welcome back, <span id="dashboardName"></span>! 👋</h1>
                     <p>Here's your shipping overview</p>
+                </div>
+
+                <!-- Warehouse Address Card -->
+                <div class="warehouse-address-card" style="background: linear-gradient(135deg, #0E244C 0%, #1A4F9B 100%); color: white; padding: 25px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(14, 36, 76, 0.15);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; gap: 20px;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                <i class="fas fa-warehouse" style="font-size: 24px; color: #D4262A;"></i>
+                                <h2 style="margin: 0; font-size: 20px;">Your USA Warehouse Address</h2>
+                            </div>
+                            <p style="opacity: 0.9; margin-bottom: 20px; font-size: 14px;">Use this address when ordering online. All packages shipped here will be forwarded to Jamaica.</p>
+                            
+                            <div id="warehouseAddressDisplay" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; border-left: 4px solid #D4262A; font-family: 'Courier New', monospace; line-height: 1.8;">
+                                <div style="font-size: 16px; font-weight: 600; margin-bottom: 10px;" id="warehouseFullName">Loading...</div>
+                                <div style="font-size: 14px;" id="warehouseAccountNumber"></div>
+                                <div style="font-size: 14px;" id="warehouseCompanyName"></div>
+                                <div style="font-size: 14px;" id="warehouseStreet"></div>
+                                <div style="font-size: 14px;" id="warehouseCity"></div>
+                                <div style="font-size: 14px;" id="warehouseCountry"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <button onclick="copyWarehouseAddress()" class="cta-button" style="white-space: nowrap; padding: 12px 20px; background: #D4262A;">
+                                <i class="fas fa-copy"></i> Copy Address
+                            </button>
+                            <button onclick="downloadWarehouseAddressPDF()" class="cta-button" style="white-space: nowrap; padding: 12px 20px; background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-download"></i> Download PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                        <p style="font-size: 12px; opacity: 0.8; margin: 0;">
+                            <i class="fas fa-info-circle"></i> <strong>Important:</strong> Always include your account number (<span id="accountNumberHighlight"></span>) when shipping to this address.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Stats Cards -->
@@ -379,13 +419,34 @@
 
                         <div class="form-group">
                             <label>Password (Leave blank to keep current)</label>
-                            <input type="password" id="profilePassword" placeholder="New password">
+                            <div class="password-input-wrapper">
+                                <input type="password" id="profilePassword" placeholder="New password" oninput="checkProfilePasswordStrength()">
+                                <button type="button" class="password-toggle" onclick="togglePassword('profilePassword')" tabindex="-1">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength-bar" style="margin-top: 8px;">
+                                <div class="password-strength-fill" id="profilePasswordStrengthFill"></div>
+                            </div>
+                            <small style="color: #666; font-size: 11px;">8+ characters, uppercase, lowercase, and number</small>
                         </div>
 
                         <button type="submit" class="cta-button">
                             <i class="fas fa-save"></i> Save Changes
                         </button>
                     </form>
+                    
+                    <!-- Warehouse Address in Profile -->
+                    <div style="margin-top: 40px; padding: 25px; background: #f8f9fa; border-radius: 12px; border-left: 4px solid #D4262A;">
+                        <h3 style="margin-top: 0; color: #0E244C;"><i class="fas fa-warehouse"></i> Your Warehouse Shipping Address</h3>
+                        <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Use this address for all your USA purchases. Your account number is: <strong id="profileAccountNumber"></strong></p>
+                        <div id="profileWarehouseAddress" style="background: white; padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; white-space: pre-line; line-height: 1.6; font-size: 14px;">
+                            Loading...
+                        </div>
+                        <button type="button" onclick="copyWarehouseAddress()" class="cta-button" style="margin-top: 15px; padding: 10px 20px; font-size: 14px;">
+                            <i class="fas fa-copy"></i> Copy Address
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -407,7 +468,7 @@
                         <div class="support-card">
                             <i class="fas fa-envelope"></i>
                             <h3>Email Us</h3>
-                            <p><a href="mailto:dnexpresslogisticsja@gmail.com">dnexpresslogisticsja@gmail.com</a></p>
+                            <p><a href="mailto:support@example.com">support@example.com</a></p>
                             <p style="font-size: 12px; color: #999;">Response within 24hrs</p>
                         </div>
 

@@ -96,29 +96,98 @@ function trackShipment(event) {
 }
 
 // Handle contact form
-function handleContactForm(event) {
+async function handleContactForm(event) {
     event.preventDefault();
     
     const form = event.target;
-    const name = form.querySelector('input[type="text"]').value;
-    const email = form.querySelector('input[type="email"]').value;
-    const subject = form.querySelectorAll('input[type="text"]')[1].value;
-    const message = form.querySelector('textarea').value;
+    const formData = {
+        name: form.querySelector('[name="name"]')?.value || form.querySelector('input[type="text"]')?.value,
+        email: form.querySelector('[name="email"]')?.value || form.querySelector('input[type="email"]')?.value,
+        subject: form.querySelector('[name="subject"]')?.value || form.querySelectorAll('input[type="text"]')[1]?.value,
+        message: form.querySelector('[name="message"]')?.value || form.querySelector('textarea')?.value
+    };
 
-    // Store in localStorage (for demo)
-    const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
-    messages.push({
-        name,
-        email,
-        subject,
-        message,
-        date: new Date().toLocaleString()
-    });
-    localStorage.setItem('contactMessages', JSON.stringify(messages));
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.message) {
+        if (window.errorHandler) {
+            window.errorHandler.handleValidationError('contact', 'Please fill in all required fields');
+        } else {
+            alert('Please fill in all required fields');
+        }
+        return;
+    }
 
-    // Show success
-    alert('✅ Message sent! We\'ll get back to you soon!');
-    form.reset();
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+        if (window.errorHandler) {
+            window.errorHandler.handleValidationError('email', 'Please enter a valid email address');
+        } else {
+            alert('Please enter a valid email address');
+        }
+        return;
+    }
+
+    try {
+        // Show loading state
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        // Try to send to backend API
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            
+            if (window.errorHandler) {
+                window.errorHandler.showSuccess('Message Sent!', 'Thank you! We will get back to you within 24 hours.');
+            } else {
+                alert('✅ Message sent! We\'ll get back to you soon!');
+            }
+            
+            form.reset();
+        } else {
+            throw new Error('Server returned ' + response.status);
+        }
+
+        // Restore button
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalText;
+
+    } catch (error) {
+        // If API not available, store locally as fallback
+        console.log('API not available, storing message locally');
+        
+        const messages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+        messages.push({
+            ...formData,
+            date: new Date().toISOString(),
+            status: 'pending'
+        });
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+
+        if (window.errorHandler) {
+            window.errorHandler.showWarning(
+                'Message Saved Locally', 
+                'Your message has been saved. Please try again later or call us at (876) 333-2649.'
+            );
+        } else {
+            alert('⚠️ Could not send message. Please try again later or contact us at (876) 333-2649');
+        }
+
+        // Restore button
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = false;
+        submitButton.innerHTML = submitButton.getAttribute('data-original-text') || 'Send Message';
+        
+        form.reset();
+    }
 }
 
 // Smooth scroll for anchor links

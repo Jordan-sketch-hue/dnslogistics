@@ -173,6 +173,58 @@ router.get('/', verifyToken, (req, res) => {
 });
 
 /**
+ * GET /api/shipments/track/:trackingNumber
+ * Public tracking endpoint - no authentication required
+ * Get shipment by tracking number
+ * 
+ * This allows customers to track their packages
+ * IMPORTANT: Must be defined BEFORE /:id route to avoid route collision
+ */
+router.get('/track/:trackingNumber', (req, res) => {
+    try {
+        const shipment = db.getShipmentByTrackingNumber(req.params.trackingNumber);
+
+        if (!shipment) {
+            return res.status(404).json({
+                success: false,
+                message: 'Shipment not found'
+            });
+        }
+
+        // Return status history without sensitive customer data
+        res.json({
+            success: true,
+            shipment: {
+                trackingNumber: shipment.trackingNumber,
+                status: shipment.status,
+                origin: {
+                    city: shipment.origin.city,
+                    state: shipment.origin.state,
+                    country: shipment.origin.country
+                },
+                destination: {
+                    city: shipment.destination.city,
+                    state: shipment.destination.state,
+                    country: shipment.destination.country
+                },
+                statusHistory: shipment.statusHistory,
+                estimatedDelivery: shipment.estimatedDelivery,
+                actualDelivery: shipment.actualDelivery,
+                createdAt: shipment.createdAt
+            }
+        });
+
+    } catch (error) {
+        console.error('Track shipment error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to track shipment',
+            error: error.message
+        });
+    }
+});
+
+/**
  * GET /api/shipments/:id
  * Get shipment details
  * Requires: Authentication
@@ -206,54 +258,6 @@ router.get('/:id', verifyToken, (req, res) => {
         res.status(500).json({
             success: false,
             message: 'Failed to retrieve shipment',
-            error: error.message
-        });
-    }
-});
-
-/**
- * GET /api/shipments/track/:trackingNumber
- * Public tracking endpoint - no authentication required
- * Get shipment by tracking number
- * 
- * This allows customers to track their packages
- */
-router.get('/track/:trackingNumber', (req, res) => {
-    try {
-        const shipment = db.getShipmentByTrackingNumber(req.params.trackingNumber);
-
-        if (!shipment) {
-            return res.status(404).json({
-                success: false,
-                message: 'Shipment not found'
-            });
-        }
-
-        // Return status history without sensitive customer data
-        res.json({
-            success: true,
-            shipment: {
-                trackingNumber: shipment.trackingNumber,
-                status: shipment.status,
-                origin: {
-                    city: shipment.origin.city,
-                    country: shipment.origin.country
-                },
-                destination: {
-                    city: shipment.destination.city,
-                    country: shipment.destination.country
-                },
-                statusHistory: shipment.statusHistory,
-                estimatedDelivery: shipment.estimatedDelivery,
-                actualDelivery: shipment.actualDelivery
-            }
-        });
-
-    } catch (error) {
-        console.error('Track shipment error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Failed to track shipment',
             error: error.message
         });
     }

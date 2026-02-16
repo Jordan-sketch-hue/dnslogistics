@@ -1,12 +1,12 @@
-# D.N Express Logistics - Web Platform
+# Logistics Platform - Web Solution
 
-[![GitHub](https://img.shields.io/badge/GitHub-dnexpress--logistics-blue?style=flat-square)](https://github.com)
+[![GitHub](https://img.shields.io/badge/GitHub-logistics--platform-blue?style=flat-square)](https://github.com)
 [![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)](https://github.com)
-[![License](https://img.shields.io/badge/License-Private-red?style=flat-square)](https://github.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](https://github.com)
 
 ## 🌍 Project Overview
 
-D.N Express Logistics is a comprehensive freight forwarding and logistics platform operating under the **Fast Forward Now** umbrella. The platform provides global shipping solutions connecting Jamaica to the world with air freight, sea freight, and local delivery services.
+This is a comprehensive freight forwarding and logistics platform. The application provides shipping solutions with air freight, sea freight, and local delivery services.
 
 **Live Demo:** (GitHub Pages will be available after pushing to GitHub)
 
@@ -15,19 +15,22 @@ D.N Express Logistics is a comprehensive freight forwarding and logistics platfo
 ## 📋 Project Structure
 
 ```
-dnexpressfastforward/
-├── index.html                 # Main website (public)
+logistics-platform/
+├── index.html                # Main website
 ├── src/
-│   ├── styles.css            # Brand styling & responsive design
-│   └── app.js                # Main JavaScript & API integration
+│   ├── styles.css           # Brand styling & responsive design
+│   └── app.js               # Main JavaScript & API integration
 ├── api/
-│   └── config.js             # Fast Forward Now API configuration
-├── private/
-│   ├── dashboard.html        # Build plan & project dashboard (PRIVATE)
-│   ├── dashboard.css         # Dashboard styling
-│   └── dashboard.js          # Dashboard interactivity
-├── assets/                   # Images, logos, and media
-├── README.md                 # This file
+│   ├── config.js            # API configuration
+│   ├── middleware/          # Authentication & validation
+│   ├── models/              # Data models
+│   ├── routes/              # API endpoints
+│   └── utils/               # Helper functions
+├── assets/                  # Images, logos, and media
+├── dashboard.html           # Admin dashboard
+├── auth.html                # Authentication forms
+├── server.js                # Express server
+├── README.md                # This file
 ├── .gitignore               # Git ignore configuration
 └── package.json             # Project metadata
 ```
@@ -51,14 +54,9 @@ dnexpressfastforward/
 - "Delivering the World Faster"
 - "Global Logistics, Local Reach"
 - "Your Cargo, Our Commitment"
+Support
 
----
-
-## 📞 Contact Information
-
-| Type | Details |
-|------|---------|
-| **Phone** | 1876-333-2649 / 1876-435-1438 |
+For questions or support regarding this project, please refer to the documentation files or submit issues through the GitHub repository.38 |
 | **Email** | dnexpresslogisticsja@gmail.com |
 | **Location** | Jamaica & Worldwide |
 | **Parent Company** | Fast Forward Now |
@@ -87,14 +85,13 @@ dnexpressfastforward/
 - 📈 **Milestones** - Phase tracking (4 phases)
 - 🏗️ **Technical Architecture** - Stack overview
 - 🎨 **Brand Guidelines** - Color palette & typography
-- ✅ **API Checklist** - Integration workflow
-- 📚 **Development Notes** - Resources and next steps
-- 🚀 **GitHub Instructions** - Deployment guide
-
----
-
-## 🚀 Getting Started
-
+- ✅ Admin Dashboard (dashboard.html)
+- 🔒 **Secure Access** - JWT authentication required
+- 📊 **Analytics** - System and shipment metrics
+- 👥 **User Management** - Customer account administration
+- 📦 **Inventory Management** - Stock and shipment tracking
+- 🏗️ **System Architecture** - Stack overview
+- ✅ **Operations** - Full platform management
 ### 1. Clone Repository
 ```bash
 git clone https://github.com/YOUR_USERNAME/dnexpress-logistics.git
@@ -255,25 +252,21 @@ This page contains:
 
 ## 🤝 Contributing
 
-This is a private project for D.N Express Logistics / Fast Forward Now. For contributions or questions, contact:
-
-📧 **Email:** dnexpresslogisticsja@gmail.com  
-📞 **Phone:** 1876-333-2649 / 1876-435-1438
+This is an open-source logistics platform. For questions or contributions, please submit issues and pull requests through GitHub.
 
 ---
 
 ## 📄 License
 
-This project is proprietary and confidential. All rights reserved to D.N Express Logistics and Fast Forward Now.
+This project is licensed under MIT License. See LICENSE file for details.
 
 ---
 
 ## 🙏 Credits
 
-- **Brand Logo:** D.N Express Logistics
-- **Reference Platform:** Fast Forward Now ([fastforwardnow.co](https://www.fastforwardnow.co))
 - **Typography:** Google Fonts
-- **Development:** GitHub Copilot Assistance
+- **Development:** Built with Node.js and Express
+- **Frontend:** Vanilla JavaScript
 
 ---
 
@@ -282,10 +275,10 @@ This project is proprietary and confidential. All rights reserved to D.N Express
 | Metric | Value |
 |--------|-------|
 | **Lines of Code** | ~1,500+ |
-| **CSS Stylesheets** | 2 |
-| **JavaScript Files** | 3 |
-| **HTML Pages** | 2 |
-| **API Endpoints** | 10+ |
+| **CSS Stylesheets** | 3 |
+| **JavaScript Files** | 7 |
+| **HTML Pages** | 4 |
+| **API Endpoints** | 20+ |
 | **Brand Colors** | 4 |
 | **Responsive Breakpoints** | 3 |
 
@@ -294,17 +287,18 @@ This project is proprietary and confidential. All rights reserved to D.N Express
 ## 🔗 Quick Links
 
 - 📱 **Main Website:** `index.html`
-- 📋 **Build Plan:** `private/dashboard.html`
-- ⚙️ **API Config:** `api/config.js`
+- 🔐 **Authentication:** `auth.html`
+- 📊 **Dashboard:** `dashboard.html`
+- ⚙️ **Server:** `server.js`
 - 🎨 **Styles:** `src/styles.css`
-- 📜 **JavaScript:** `src/app.js`
+- 📜 **API:** `api/routes/`
 
 ---
 
-**Last Updated:** February 3, 2026  
+**Last Updated:** February 2026  
 **Version:** 1.0.0  
-**Status:** 🟢 Active Development
+**Status:** 🟢 Active
 
 ---
 
-Made with ❤️ for D.N Express Logistics
+Made with 💪 for global logistics solutions

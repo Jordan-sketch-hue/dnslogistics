@@ -1,38 +1,28 @@
 {
-  "name": "dnexpress-logistics",
+  "name": "logistics-platform",
   "version": "1.0.0",
-  "description": "D.N Express Logistics - Global freight forwarding platform under Fast Forward Now umbrella",
-  "author": "D.N Express Logistics",
-  "license": "PRIVATE",
+  "description": "Global freight forwarding and logistics platform",
+  "author": "Your Name",
+  "license": "MIT",
   "keywords": [
     "logistics",
     "freight",
     "shipping",
-    "Jamaica",
-    "fast-forward-now",
-    "d-n-express"
+    "platform",
+    "express",
+    "api"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/dnexpress-logistics.git"
+    "url": "https://github.com/YOUR_USERNAME/logistics-platform.git"
   },
-  "homepage": "https://YOUR_USERNAME.github.io/dnexpress-logistics",
+  "homepage": "https://YOUR_USERNAME.github.io/logistics-platform",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/dnexpress-logistics/issues",
-    "email": "dnexpresslogisticsja@gmail.com"
-  },
-  "contact": {
-    "phone": [
-      "1876-333-2649",
-      "1876-435-1438"
-    ],
-    "email": "dnexpresslogisticsja@gmail.com",
-    "website": "https://www.fastforwardnow.co"
+    "url": "https://github.com/YOUR_USERNAME/logistics-platform/issues"
   },
   "company": {
-    "name": "D.N Express Logistics",
-    "parent": "Fast Forward Now",
-    "location": "Jamaica"
+    "name": "Your Company Name",
+    "location": "Worldwide"
   },
   "brandColors": {
     "primaryNavy": "#0E244C",
@@ -46,28 +36,28 @@
     "details": "Open Sans"
   },
   "taglines": [
-    "Delivering the World Faster",
-    "Global Logistics, Local Reach",
+    "Delivering Faster",
+    "Global Reach, Local Service",
     "Your Cargo, Our Commitment"
   ],
   "pages": {
     "public": {
       "index": "index.html",
-      "title": "D.N Express Logistics - Main Website"
+      "title": "Main Website"
     },
     "private": {
-      "dashboard": "private/dashboard.html",
-      "title": "Build Plan & Project Dashboard"
+      "dashboard": "dashboard.html",
+      "title": "Admin Dashboard"
     }
   },
   "api": {
-    "provider": "Fast Forward Now",
-    "baseURL": "https://api.fastforwardnow.co/v1",
+    "baseURL": "http://localhost:5000/api",
     "endpoints": {
       "shipments": "/shipments",
       "rates": "/rates",
-      "services": "/services",
-      "dashboard": "/dashboard"
+      "status": "/status",
+      "inventory": "/inventory",
+      "customers": "/customers"
     }
   },
   "development": {
@@ -78,27 +68,24 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "deploy": "git push -u origin main",
-    "build": "echo 'Backend server ready for deployment'",
     "test": "jest --coverage"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "express-cors": "^0.0.1",
+    "axios": "^1.6.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "express-cors": "^0.0.1",
+    "express-session": "^1.19.0",
     "jsonwebtoken": "^9.0.0",
+    "passport": "^0.7.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
     "uuid": "^9.0.0",
     "validator": "^13.9.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  },
-  "deployment": {
-    "platform": "GitHub Pages",
-    "url": "https://YOUR_USERNAME.github.io/dnexpress-logistics/",
-    "repository": "dnexpress-logistics",
-    "branch": "main"
   }
 }

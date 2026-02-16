@@ -1,9 +1,27 @@
 # Git ignore for D.N Express Logistics
 
-# Environment variables
+# Environment variables (CRITICAL - DO NOT COMMIT)
 .env
 .env.local
 .env.*.local
+.env.production
+.env.development
+
+# Sensitive data and credentials
+*.key
+*.pem
+api-keys.txt
+credentials.json
+secrets.json
+config/credentials.js
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data.json
+database.json
+users.json
 
 # IDE and Editor files
 .vscode/
@@ -18,6 +36,7 @@ Thumbs.db
 node_modules/
 npm-debug.log
 yarn-error.log
+package-lock.json
 
 # Build files
 dist/
@@ -39,16 +58,6 @@ Thumbs.db
 *.bak
 *.old
 
-# Private sensitive data
-*.key
-*.pem
-api-keys.txt
-credentials.json
-
-# Package manager lock files (optional - keep or remove based on preference)
-# package-lock.json
-# yarn.lock
-
 # Testing
 coverage/
 .pytest_cache/
@@ -59,3 +68,10 @@ coverage/
 # Generated files
 *.min.js
 *.min.css
+
+# Audit and debug files
+*AUDIT*.md
+*DEBUG*.md
+*FIX*.md
+*ERROR*.md
+OAUTH_SETUP_GUIDE.md

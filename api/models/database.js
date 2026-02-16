@@ -26,6 +26,7 @@ class Database {
         this.shipments = [];
         this.inventory = [];
         this.statusUpdates = [];
+        this.manifests = [];
         
         // Load persisted data if available
         this.loadData();
@@ -35,32 +36,89 @@ class Database {
      * User Management
      */
 
+    /**
+     * Generate unique customer number
+     * Format: DNX-XXXXXX (e.g., DNX-100001)
+     */
+    generateCustomerNumber() {
+        const prefix = 'DNX';
+        const number = String(this.users.length + 100001).padStart(6, '0');
+        const customerNumber = `${prefix}-${number}`;
+        
+        // Ensure uniqueness
+        if (this.users.find(u => u.customerNumber === customerNumber)) {
+            return this.generateCustomerNumber();
+        }
+        
+        return customerNumber;
+    }
+
+    /**
+     * Generate warehouse shipping address for customer
+     * This is the USA address customers use to ship their packages
+     */
+    generateWarehouseAddress(customerNumber, customerName) {
+        return {
+            customerNumber: customerNumber,
+            recipientName: customerName,
+            companyName: 'D.N Express Logistics',
+            street1: '4651 NW 72nd Avenue',
+            street2: `Suite 101 - ${customerNumber}`,
+            city: 'Miami',
+            state: 'FL',
+            zipCode: '33166',
+            country: 'USA',
+            fullAddress: `${customerName}\nAccount: ${customerNumber}\nD.N Express Logistics\n4651 NW 72nd Avenue, Suite 101\nMiami, FL 33166\nUSA`
+        };
+    }
+
     createUser(userData) {
+        const userId = this.generateId();
+        const customerNumber = this.generateCustomerNumber();
+        const customerName = `${userData.firstName} ${userData.lastName}`;
+        const warehouseAddress = this.generateWarehouseAddress(customerNumber, customerName);
+        
         const user = {
-            id: this.generateId(),
+            id: userId,
+            customerNumber: customerNumber,
             companyName: userData.companyName,
             firstName: userData.firstName,
             lastName: userData.lastName,
             email: userData.email,
             phone: userData.phone,
-            password: userData.password, // Should be hashed
+            password: userData.password, // Should be hashed (null for OAuth users)
             role: userData.role || 'customer',
-            status: 'active',
+            status: userData.status || 'active',
             createdAt: new Date(),
             updatedAt: new Date(),
+            // OAuth provider IDs
+            googleId: userData.googleId || null,
+            facebookId: userData.facebookId || null,
             profile: {
                 address: userData.address || '',
                 city: userData.city || '',
                 state: userData.state || '',
                 zipCode: userData.zipCode || '',
                 country: userData.country || '',
-                businessType: userData.businessType || ''
+                businessType: userData.businessType || '',
+                photoURL: userData.profile?.photoURL || null,
+                authProvider: userData.profile?.authProvider || 'email',
+                ...userData.profile
             },
+            warehouseAddress: warehouseAddress,
             settings: {
                 currency: 'USD',
                 language: 'en',
                 timezone: 'UTC',
                 notifications: true
+            },
+            // Sethwan integration fields (populated when integrated)
+            sethwan: {
+                customerId: null,
+                accountId: null,
+                apiKey: null,
+                defaultWarehouse: null,
+                integrated: false
             }
         };
 
@@ -91,6 +149,13 @@ class Database {
             const { password, ...userWithoutPassword } = u;
             return userWithoutPassword;
         });
+    }
+
+    /**
+     * Get user by customer number
+     */
+    getUserByCustomerNumber(customerNumber) {
+        return this.users.find(u => u.customerNumber === customerNumber);
     }
 
     /**
@@ -294,6 +359,7 @@ class Database {
                 shipments: this.shipments,
                 inventory: this.inventory,
                 statusUpdates: this.statusUpdates,
+                manifests: this.manifests,
                 lastSaved: new Date()
             };
             fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
@@ -316,6 +382,7 @@ class Database {
                 this.shipments = data.shipments || [];
                 this.inventory = data.inventory || [];
                 this.statusUpdates = data.statusUpdates || [];
+                this.manifests = data.manifests || [];
             }
         } catch (error) {
             console.error('Error loading data:', error);
@@ -368,6 +435,60 @@ class Database {
             acc[s.status] = (acc[s.status] || 0) + 1;
             return acc;
         }, {});
+    }
+
+    /**
+     * Manifest Management
+     */
+
+    createManifest(manifestData) {
+        const manifest = {
+            id: this.generateId(),
+            manifestNumber: this.generateManifestNumber(),
+            companyId: manifestData.companyId,
+            shipmentIds: manifestData.shipmentIds,
+            manifestType: manifestData.manifestType || 'standard',
+            destination: manifestData.destination || '',
+            status: 'pending', // pending, submitted, approved, rejected
+            shipmentCount: manifestData.shipmentIds.length,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+
+        if (!this.manifests) {
+            this.manifests = [];
+        }
+
+        this.manifests.push(manifest);
+        this.saveData();
+        return manifest;
+    }
+
+    getManifestById(manifestId) {
+        if (!this.manifests) return null;
+        return this.manifests.find(m => m.id === manifestId);
+    }
+
+    getManifestsByCompany(companyId) {
+        if (!this.manifests) return [];
+        return this.manifests.filter(m => m.companyId === companyId);
+    }
+
+    updateManifestStatus(manifestId, status) {
+        const manifest = this.getManifestById(manifestId);
+        if (!manifest) return null;
+
+        manifest.status = status;
+        manifest.updatedAt = new Date();
+        this.saveData();
+        return manifest;
+    }
+
+    generateManifestNumber() {
+        const prefix = 'MNF';
+        const date = new Date().toISOString().split('-').join('').substring(0, 8);
+        const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+        return `${prefix}-${date}-${random}`;
     }
 }
 

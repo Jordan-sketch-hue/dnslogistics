@@ -208,7 +208,9 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    background: linear-gradient(135deg, rgba(14, 36, 76, 0.92) 0%, rgba(26, 79, 155, 0.88) 100%),
+                url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+    background-attachment: fixed;
 }
 
 .hero::before {
@@ -218,8 +220,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(212, 38, 42, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(26, 79, 155, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 50%, rgba(212, 38, 42, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(26, 79, 155, 0.15) 0%, transparent 50%);
     z-index: 0;
 }
 

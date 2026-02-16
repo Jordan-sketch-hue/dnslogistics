@@ -1,10 +1,10 @@
-# D.N Express Logistics API Documentation
+# Logistics Platform API Documentation
 
-## White Label Courier Platform - Backend API Reference
+## Backend API Reference
 
 **Version:** 1.0.0  
 **Last Updated:** February 2026  
-**Base URL:** `https://api.dnexpresslogistics.com/api` (or `http://localhost:5000/api` for development)
+**Base URL:** `http://localhost:5000/api` for development
 
 ---
 
@@ -94,8 +94,8 @@ Response:
 
 ### User Roles
 
-- **customer**: Company using the white-label platform
-- **admin**: System administrator (Fast Forward Now staff)
+- **customer**: User with standard account access
+- **admin**: System administrator with full access
 
 ### Shipment Statuses
 
@@ -131,18 +131,16 @@ POST /auth/register
 Content-Type: application/json
 
 {
-  "companyName": "D.N Express Logistics",
   "firstName": "John",
   "lastName": "Doe",
-  "email": "john@dnexpress.com",
-  "phone": "1876-333-2649",
+  "email": "john@example.com",
+  "phone": "+1-555-0123",
   "password": "SecurePass123",
   "address": "123 Main Street",
-  "city": "Kingston",
-  "state": "ST",
-  "zipCode": "12345",
-  "country": "Jamaica",
-  "businessType": "Courier Service"
+  "city": "New York",
+  "state": "NY",
+  "zipCode": "10001",
+  "country": "USA"
 }
 
 Response (201):
@@ -150,9 +148,8 @@ Response (201):
   "success": true,
   "message": "Account created successfully",
   "user": {
-    "id": "id_1234567890_abc123",
-    "companyName": "D.N Express Logistics",
-    "email": "john@dnexpress.com",
+    "id": "cust_1234567890_abc123",
+    "email": "john@example.com",
     "role": "customer",
     "status": "active",
     "createdAt": "2026-02-11T10:30:00Z",
@@ -172,7 +169,7 @@ POST /auth/login
 Content-Type: application/json
 
 {
-  "email": "john@dnexpress.com",
+{\n  "email": "john@example.com",
   "password": "SecurePass123"
 }
 
@@ -213,15 +210,14 @@ Response (200):
   "success": true,
   "user": {
     "id": "id_1234567890_abc123",
-    "companyName": "D.N Express Logistics",
     "firstName": "John",
     "lastName": "Doe",
-    "email": "john@dnexpress.com",
+    "email": "john@example.com",
     "status": "active",
     "profile": {
       "address": "123 Main Street",
-      "city": "Kingston",
-      "country": "Jamaica"
+      "city": "New York",
+      "country": "USA"
     },
     "settings": {
       "currency": "USD",
@@ -240,9 +236,9 @@ Authorization: Bearer <token>
 Content-Type: application/json
 
 {
-  "phone": "1876-435-1438",
+  "phone": "+1-555-0103",
   "profile": {
-    "city": "Montego Bay"
+    "city": "San Francisco"
   }
 }
 
@@ -289,21 +285,21 @@ Content-Type: application/json
 {
   "origin": {
     "address": "123 Main Street",
-    "city": "Kingston",
-    "state": "ST",
-    "zipCode": "12345",
-    "country": "Jamaica",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "USA",
     "contactName": "Sender Name",
-    "contactPhone": "1876-333-2649"
+    "contactPhone": "+1-555-0101"
   },
   "destination": {
     "address": "456 Oak Avenue",
-    "city": "Montego Bay",
-    "state": "ST",
-    "zipCode": "54321",
-    "country": "Jamaica",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001",
+    "country": "USA",
     "contactName": "Recipient Name",
-    "contactPhone": "1876-435-1438"
+    "contactPhone": "+1-555-0103"
   },
   "package": {
     "weight": 5.5,
@@ -838,6 +834,5 @@ docker run -p 5000:5000 --env-file .env dnexpress-api:1.0.0
 ## Support
 
 For API support or issues:
-- Email: api-support@dnexpresslogistics.com
-- Documentation: https://docs.dnexpresslogistics.com
-- Issues: https://github.com/fastforward-now/dnexpress-api/issues
+- Documentation: See README.md for setup instructions
+- Issues: Submit via GitHub repository issues

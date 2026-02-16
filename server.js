@@ -23,6 +23,9 @@ const shipmentRoutes = require('./api/routes/shipments');
 const inventoryRoutes = require('./api/routes/inventory');
 const statusRoutes = require('./api/routes/status');
 const adminRoutes = require('./api/routes/admin');
+const manifestRoutes = require('./api/routes/manifests');
+const reportsRoutes = require('./api/routes/reports');
+const sethwanRoutes = require('./api/routes/sethwan');
 
 // Initialize Express app
 const app = express();
@@ -32,7 +35,25 @@ const app = express();
 
 // CORS - Allow requests from frontend
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps, Postman, or file://)
+        if (!origin) return callback(null, true);
+        
+        // List of allowed origins
+        const allowedOrigins = [
+            'http://localhost:5000',
+            'http://localhost:3000',
+            'http://127.0.0.1:5000',
+            'http://127.0.0.1:3000',
+            process.env.FRONTEND_URL
+        ];
+        
+        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -110,6 +131,31 @@ app.use('/api/status', statusRoutes);
 // GET    /api/admin/users       - List all users
 // GET    /api/admin/reports     - Generate reports
 app.use('/api/admin', adminRoutes);
+
+// Manifest routes
+// POST   /api/manifests         - Create manifest
+// GET    /api/manifests         - List manifests
+// GET    /api/manifests/:id     - Get manifest details
+// GET    /api/manifests/:id/pdf - Download PDF
+// PATCH  /api/manifests/:id/status - Update status
+app.use('/api/manifests', manifestRoutes);
+
+// Reports routes
+// GET    /api/reports/revenue   - Revenue analytics
+// GET    /api/reports/delivery-performance - Delivery metrics
+// GET    /api/reports/inventory-health - Inventory status
+// GET    /api/reports/carrier-costs - Cost analysis
+// POST   /api/reports/custom    - Custom report
+app.use('/api/reports', reportsRoutes);
+
+// Sethwan Integration routes
+// POST   /api/sethwan/test-connection - Test API connection
+// POST   /api/sethwan/connect   - Establish integration
+// GET    /api/sethwan/status    - Get integration status
+// GET    /api/sethwan/warehouses - List warehouses
+// POST   /api/sethwan/sync-shipment - Sync shipment
+// GET    /api/sethwan/health-check - Health check
+app.use('/api/sethwan', sethwanRoutes);
 
 // Serve static files from multiple directories
 app.use(express.static('public'));
@@ -195,7 +241,10 @@ app.get('/api/health', (req, res) => {
             shipments: '/api/shipments',
             inventory: '/api/inventory',
             status: '/api/status',
-            admin: '/api/admin'
+            admin: '/api/admin',
+            manifests: '/api/manifests',
+            reports: '/api/reports',
+            sethwan: '/api/sethwan'
         },
         timestamp: new Date().toISOString()
     });
