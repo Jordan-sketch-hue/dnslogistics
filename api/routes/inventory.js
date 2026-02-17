@@ -8,11 +8,6 @@
  * - Track inventory levels
  * - Manage SKUs and locations
  */
- * - Add items to inventory
- * - Update inventory quantities
- * - Track inventory levels
- * - Manage SKUs
- */
 
 const express = require('express');
 const router = express.Router();
