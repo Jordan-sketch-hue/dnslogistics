@@ -160,6 +160,9 @@ app.use('/api/reports', reportsRoutes);
 // GET    /api/sethwan/health-check - Health check
 app.use('/api/sethwan', sethwanRoutes);
 
+// Serve static files from root (for manifest.json)
+app.use(express.static(path.join(__dirname)));
+
 // Serve static files from multiple directories
 const staticDirs = ['public', 'src', 'assets'];
 staticDirs.forEach(dir => {
@@ -272,20 +275,6 @@ app.get('/api/health', (req, res) => {
         },
         timestamp: new Date().toISOString()
     });
-});
-
-// Web App Manifest route
-app.get('/manifest.json', (req, res) => {
-    const fs = require('fs');
-    const filePath = path.join(__dirname, 'manifest.json');
-    try {
-        const content = fs.readFileSync(filePath, 'utf8');
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Cache-Control', 'public, max-age=3600');
-        res.send(content);
-    } catch (error) {
-        res.status(404).json({ error: 'Manifest not found' });
-    }
 });
 
 // 404 Handler
