@@ -15,5 +15,7 @@
   "env": {
     "NODE_ENV": "production",
     "PORT": "3000"
-  }
+  },
+  "regions": ["iad1"],
+  "alias": ["dnexpress.biz", "www.dnexpress.biz"]
 }
