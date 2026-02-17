@@ -274,6 +274,20 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// Web App Manifest route
+app.get('/manifest.json', (req, res) => {
+    const fs = require('fs');
+    const filePath = path.join(__dirname, 'manifest.json');
+    try {
+        const content = fs.readFileSync(filePath, 'utf8');
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.send(content);
+    } catch (error) {
+        res.status(404).json({ error: 'Manifest not found' });
+    }
+});
+
 // 404 Handler
 app.use((req, res) => {
     res.status(404).json({

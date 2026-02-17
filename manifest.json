@@ -1,0 +1,39 @@
+{
+  "name": "D.N Express Logistics",
+  "short_name": "D.N Express",
+  "description": "Fast, reliable shipping solutions from USA to Jamaica and beyond",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#D4262A",
+  "background_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "assets/dnexpress%20logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/dnexpress%20logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/dnexpress%20logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "logistics"],
+  "screenshots": [
+    {
+      "src": "assets/dnexpress%20logo.jpg",
+      "sizes": "540x720",
+      "type": "image/jpeg"
+    }
+  ]
+}
