@@ -75,3 +75,9 @@ coverage/
 *FIX*.md
 *ERROR*.md
 OAUTH_SETUP_GUIDE.md
+
+# Internal documentation (not for public viewing)
+MASTER_IMPLEMENTATION_PLAN.md
+START_HERE.md
+DEPLOYMENT_CHECKLIST.md
+SETUP_AND_DEPLOYMENT.md
