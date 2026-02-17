@@ -1,5 +1,6 @@
 /**
- * Authentication System - Connected to Backend API
+ * D.N Express Logistics - Authentication System
+ * Connected to Backend API
  * Handles login, registration, and token management
  * Communicates with Express backend at /api/auth endpoints
  */

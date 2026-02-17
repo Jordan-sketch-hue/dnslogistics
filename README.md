@@ -1,14 +1,27 @@
-# Logistics Platform - Web Solution
+# D.N Express Logistics Platform
 
-[![GitHub](https://img.shields.io/badge/GitHub-logistics--platform-blue?style=flat-square)](https://github.com)
-[![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)](https://github.com)
+[![GitHub](https://img.shields.io/badge/GitHub-dnslogistics-blue?style=flat-square)](https://github.com/Jordan-sketch-hue/dnslogistics)
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=flat-square)](https://github.com)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](https://github.com)
 
 ## 🌍 Project Overview
 
-This is a comprehensive freight forwarding and logistics platform. The application provides shipping solutions with air freight, sea freight, and local delivery services.
+**D.N Express Logistics** is a comprehensive courier and warehouse management platform. We provide fast, reliable shipping solutions from USA to Jamaica and worldwide.
 
-**Live Demo:** (GitHub Pages will be available after pushing to GitHub)
+**Website:** https://dnexpress.com  
+**Platform:** https://dnslogistics.vercel.app
+
+---
+
+## 🚀 Features
+
+- 🔐 **Secure Authentication** - JWT tokens + password hashing
+- 📦 **Shipment Management** - Create, track, and manage shipments
+- 🏭 **Warehouse Integration** - Sethwan platform integration
+- 📊 **Advanced Analytics** - Revenue, delivery, and inventory reports
+- 📋 **Manifest Management** - Generate and export shipping manifests
+- ⚡ **Production Ready** - Deployed on Vercel
+- 🌐 **Responsive Design** - Works on all devices
 
 ---
 

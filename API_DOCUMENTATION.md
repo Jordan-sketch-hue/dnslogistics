@@ -1,10 +1,11 @@
-# Logistics Platform API Documentation
+# D.N Express Logistics API Documentation
 
 ## Backend API Reference
 
 **Version:** 1.0.0  
 **Last Updated:** February 2026  
-**Base URL:** `http://localhost:5000/api` for development
+**Base URL:** `http://localhost:5000/api` for development  
+**Production:** `https://api.dnexpress.com/v1`
 
 ---
 

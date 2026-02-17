@@ -1,11 +1,12 @@
 /**
  * Database Module
- * In-Memory Data Store with Persistence
+ * D.N Express Logistics - In-Memory Data Store with Persistence
  * 
  * This module manages all data for the application:
  * - Users (Customers/Companies)
  * - Shipments
  * - Inventory
+ * - Manifests
  * - Status Updates
  * 
  * IMPORTANT: This uses in-memory storage for development/testing.

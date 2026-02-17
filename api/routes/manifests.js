@@ -1,5 +1,6 @@
 /**
  * Manifest Routes
+ * D.N Express Logistics - Shipping Manifest Management
  * 
  * Handles generation of shipping manifests for customs/delivery
  * Supports:

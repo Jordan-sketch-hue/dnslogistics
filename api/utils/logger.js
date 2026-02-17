@@ -1,6 +1,8 @@
 /**
  * Logger Utility
- * Centralized logging system for all API operations
+ * D.N Express Logistics - Centralized Logging System
+ * 
+ * Provides comprehensive logging for all API operations
  */
 
 class Logger {

@@ -1,5 +1,6 @@
 /**
  * Sethwan API Integration Middleware
+ * D.N Express Logistics - Warehouse Platform Integration
  * 
  * This middleware handles communication with the Sethwan logistics platform.
  * Sethwan is a courier/warehouse management system that offers:
@@ -7,6 +8,7 @@
  * - Package management
  * - Manifest generation
  * - Pricing integration
+ * - Warehouse operations
  * 
  * This module translates between our internal data format and Sethwan's API format.
  */

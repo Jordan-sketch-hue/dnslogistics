@@ -1,5 +1,6 @@
 /**
  * Customer Routes
+ * D.N Express Logistics - Customer Profile Management
  * 
  * GET    /api/customers/:id      - Get customer profile
  * PUT    /api/customers/:id      - Update customer profile

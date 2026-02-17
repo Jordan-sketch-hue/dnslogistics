@@ -1,6 +1,8 @@
 /**
  * Validation Utilities
- * Helper functions for validating user input
+ * D.N Express Logistics - Input Validation & Sanitization
+ * 
+ * Helper functions for validating user input across the platform
  */
 
 const validator = require('validator');

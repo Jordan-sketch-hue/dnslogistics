@@ -1,15 +1,17 @@
 /**
- * D.N Express Logistics - Fast Forward Now White Label Backend
+ * D.N Express Logistics Backend Server
  * Express.js Server Configuration
  * 
- * This is the main backend server for the white-label courier platform.
+ * This is the main backend server for the courier and warehouse platform.
  * It handles:
  * - Customer authentication (login/register)
  * - Customer profile management
  * - Shipment tracking and management
- * - Inventory management
+ * - Inventory and warehouse management
+ * - Manifest generation and tracking
  * - Status updates and notifications
- * - Admin operations
+ * - Sethwan warehouse integration
+ * - Admin operations and analytics
  */
 
 const express = require('express');

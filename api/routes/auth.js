@@ -1,5 +1,6 @@
 /**
  * Authentication Routes
+ * D.N Express Logistics Platform
  * 
  * POST   /api/auth/register  - Register new company/customer account
  * POST   /api/auth/login     - Login existing customer

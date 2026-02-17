@@ -1,7 +1,13 @@
 /**
  * Inventory Routes
+ * D.N Express Logistics - Warehouse Inventory Management
  * 
  * Handles inventory management:
+ * - Add items to inventory
+ * - Update inventory quantities
+ * - Track inventory levels
+ * - Manage SKUs and locations
+ */
  * - Add items to inventory
  * - Update inventory quantities
  * - Track inventory levels

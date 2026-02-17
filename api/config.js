@@ -1,19 +1,19 @@
 /**
  * D.N Express Logistics API Configuration
- * Fast Forward Now Integration
+ * Courier & Warehouse Management Platform
  */
 
 const API_CONFIG = {
-    // Primary API endpoint for Fast Forward Now
-    baseURL: process.env.REACT_APP_API_BASE_URL || 'https://api.fastforwardnow.co/v1',
+    // Primary API endpoint
+    baseURL: process.env.API_URL || 'https://api.dnexpress.com/v1',
     
     // Local API endpoint for development
-    localURL: 'http://localhost:3000/api',
+    localURL: 'http://localhost:5000/api',
     
     // Authentication
     auth: {
         type: 'Bearer',
-        tokenKey: 'ffn_auth_token',
+        tokenKey: 'dnexpress_auth_token',
         refreshEndpoint: '/auth/refresh'
     },
 

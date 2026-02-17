@@ -1,5 +1,6 @@
 /**
  * Admin Routes
+ * D.N Express Logistics - Administrative Operations
  * 
  * Administrative operations:
  * - Dashboard metrics

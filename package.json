@@ -1,28 +1,30 @@
 {
-  "name": "logistics-platform",
+  "name": "dnexpress-logistics",
   "version": "1.0.0",
-  "description": "Global freight forwarding and logistics platform",
-  "author": "Your Name",
+  "description": "D.N Express - Fast, reliable shipping solutions from USA to Jamaica and beyond",
+  "author": "Jordan Sketch Hue",
   "license": "MIT",
   "keywords": [
     "logistics",
     "freight",
     "shipping",
-    "platform",
+    "courier",
     "express",
+    "usa",
+    "jamaica",
     "api"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/logistics-platform.git"
+    "url": "https://github.com/Jordan-sketch-hue/dnslogistics.git"
   },
-  "homepage": "https://YOUR_USERNAME.github.io/logistics-platform",
+  "homepage": "https://dnexpress.com",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/logistics-platform/issues"
+    "url": "https://github.com/Jordan-sketch-hue/dnslogistics/issues"
   },
   "company": {
-    "name": "Your Company Name",
-    "location": "Worldwide"
+    "name": "D.N Express Logistics",
+    "location": "Miami, FL USA"
   },
   "brandColors": {
     "primaryNavy": "#0E244C",

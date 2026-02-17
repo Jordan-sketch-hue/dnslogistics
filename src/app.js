@@ -1,12 +1,14 @@
 // D.N Express Logistics - Main Application JavaScript
+// Courier & Warehouse Platform
 // Handles tracking, API integration, and dynamic content
 
 // Configuration
 const config = {
-    apiEndpoint: 'https://api.fastforwardnow.co/v1',
+    apiEndpoint: 'https://api.dnexpress.com/v1',
     localApiEndpoint: '/api',
     company: 'D.N Express Logistics',
-    version: '1.0.0'
+    version: '1.0.0',
+    slogan: 'Delivering the World Faster'
 };
 
 // Initialize application
